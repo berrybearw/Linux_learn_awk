@@ -5,6 +5,7 @@ awk ( 讀取列 )
 * https://www.baeldung.com/linux/print-lines-between-two-patterns
 * https://www.cyberciti.biz/faq/sed-display-text/
 
+
 垂直加總資料
 ---
 參考 : 
@@ -58,8 +59,22 @@ awk -F : '{out=""; for(i=2;i<=NF;i++){out=out"\n"$i}; print out}'
 awk '{print $NF}' file.txt
 
 
+參考 : 
+
+* https://www.baeldung.com/linux/print-lines-between-two-patterns
+* https://www.cyberciti.biz/faq/sed-display-text/
+
 顯示關鍵字之間字詞
 ---
+
+情境 1 :
+> 要找顯示版本資訊內容
+> 如圖 version 與 version 之間是版本資訊
+
+![image](https://user-images.githubusercontent.com/96226780/202674404-09bfcf39-63aa-41ee-985b-7e439b0facf2.png)
+
+- 方案 1 : awk
+
 ```bash
 awk '/開頭/, /結尾/' file
 ```
@@ -68,9 +83,7 @@ awk '/開頭/, /結尾/' file
 awk '/version \(s\)/, /version \(e\)/' r.h
 ```
 
-範例 : 
-
-![image](https://user-images.githubusercontent.com/96226780/202674404-09bfcf39-63aa-41ee-985b-7e439b0facf2.png)
+- 方案 2 : sed
 
 `sed -n '/開頭/, /結尾/p' file`
 
@@ -78,9 +91,14 @@ awk '/version \(s\)/, /version \(e\)/' r.h
 
 ![image](https://user-images.githubusercontent.com/96226780/202674501-a0d53bff-9853-459c-9ead-8539be7ce180.png)
 
-`grep -o -P '(?=開頭).*(?=尾部)'`
+情境 2 : 
+>要找尋 lsof 顯示 檔案目錄以及對應檔案
 
-![image](https://user-images.githubusercontent.com/96226780/202674649-45db0dda-ecd0-49ea-b04c-b0b31b249be2.png)
+![image](https://user-images.githubusercontent.com/96226780/202677114-d1faf108-9dd7-467e-8569-19a322d786f2.png)
+
+- 方案 3 : grep
+
+`grep -o -P '(?=開頭).*(?=尾部)'`
 
 ![image](https://user-images.githubusercontent.com/96226780/202674675-52c50d9f-31c0-426b-8837-6f22a03b395c.png)
 
